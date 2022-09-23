@@ -1,0 +1,13 @@
+# Clion
+
+# Jupiter notebook
+
+.ipynb_checkpoints
+
+# Python
+__pycache__
+.pytest_cache
+
+# System files
+
+.DS_Store
