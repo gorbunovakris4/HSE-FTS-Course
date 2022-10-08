@@ -1,7 +1,7 @@
 class Board:
     def __init__(self, size):
         self.size = size
-        self.board = [ [-1] * size for i in range(size)]
+        self.board = [[-1] * size for _ in range(size)]
 
     def set(self, i, j, player=0):
 
@@ -20,7 +20,7 @@ class Board:
         self.board[i][j] = -1
 
     def is_empty(self, i, j):
-        return not self.is_valid_coordinates(i, j) or self.board[i][j] < 0
+        return self.board[i][j] < 0
 
     def empty_cells(self):
         moves = set()
@@ -33,12 +33,7 @@ class Board:
         return moves
 
     def need_in_row(self):
-        if self.size == 3:
-            return 3
-        elif self.size == 4:
-            return 4
-        else:
-            return 5
+        return min(5, self.size)
 
     def is_valid_coordinates(self, i, j):
         return min(i, j) >= 0 and max(i, j) < self.size
@@ -91,9 +86,9 @@ class Board:
             for j in range(self.size):
                 for player in [0, 1]:
                     if self.win_horizontal(i, j, need, player) \
-                    or self.win_vertical(i, j, need, player) \
-                    or self.win_diagonal(i, j, need, player) \
-                    or self.win_diagonal_reverse(i, j, need, player):
+                            or self.win_vertical(i, j, need, player) \
+                            or self.win_diagonal(i, j, need, player) \
+                            or self.win_diagonal_reverse(i, j, need, player):
                         return player
 
         return -1
@@ -104,7 +99,7 @@ class Board:
                 if self.is_empty(i, j):
                     return False
         return True
-    
+
     def board_symbol(self, i, j):
         value = self.board[i][j]
         if value == 0:
@@ -136,7 +131,7 @@ class Board:
 
             print(f'| {i + 1}|', end='')
             for j in range(self.size):
-                print(f' {self.board_symbol(i, j)}|', end = '')
+                print(f' {self.board_symbol(i, j)}|', end='')
 
             print()
 
